@@ -13,4 +13,12 @@
         android:src="@color/black"
         android:background="@color/teal_200"
         tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/some_object_for_round"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:src="@color/black"
+        android:background="@color/teal_200"
+        tools:ignore="ContentDescription" />
 </FrameLayout>

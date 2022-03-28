@@ -1,11 +1,12 @@
 package com.my.my_animation_example
 
-import android.animation.ArgbEvaluator
-import android.animation.ValueAnimator
+import android.animation.*
 import android.graphics.Color
+import android.graphics.Path
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.animation.AccelerateInterpolator
 import android.widget.FrameLayout
 import android.widget.ImageView
 
@@ -13,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     private val view by lazy { findViewById<FrameLayout>(R.id.container) }
     private val someObjectForLinear by lazy { findViewById<ImageView>(R.id.some_object_for_linear) }
+    private val objectForRound by lazy { findViewById<ImageView>(R.id.some_object_for_round) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,9 +28,11 @@ class MainActivity : AppCompatActivity() {
         applyChangeBackgroundColorAnimation()
 
         applyChangeLinearTranslationAnimation()
+
+        applyObjectAnimByCircle()
     }
 
-    private fun applyChangeBackgroundColorAnimation(){
+    private fun applyChangeBackgroundColorAnimation() {
         ValueAnimator.ofObject(ArgbEvaluator(), Color.RED, Color.GREEN).apply {
             //duration in millis of all animation
             duration = 30000
@@ -40,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun applyChangeLinearTranslationAnimation(){
+    private fun applyChangeLinearTranslationAnimation() {
         someObjectForLinear.setOnClickListener {
             Log.d("qq", "CLICK")
         }
@@ -51,6 +55,20 @@ class MainActivity : AppCompatActivity() {
             }
 
             duration = 10000
+            start()
+        }
+    }
+
+    private fun applyObjectAnimByCircle(){
+        val path = Path()
+        path.addCircle(100f, 400f, 200f, Path.Direction.CW)
+
+        objectForRound.setOnClickListener {
+            Log.d("ww", "CLICK CIRCLE")
+        }
+
+        ObjectAnimator.ofFloat(objectForRound, "translationX", "translationY", path).apply {
+            duration = 15000
             start()
         }
     }
