@@ -4,4 +4,13 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" />
+    tools:context=".MainActivity" >
+
+    <ImageView
+        android:id="@+id/some_object_for_linear"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:src="@color/black"
+        android:background="@color/teal_200"
+        tools:ignore="ContentDescription" />
+</FrameLayout>
