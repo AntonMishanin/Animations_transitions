@@ -3,6 +3,7 @@ package com.my.my_animation_example
 import android.animation.*
 import android.graphics.Color
 import android.graphics.Path
+import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     private val view by lazy { findViewById<FrameLayout>(R.id.container) }
     private val someObjectForLinear by lazy { findViewById<ImageView>(R.id.some_object_for_linear) }
     private val objectForRound by lazy { findViewById<ImageView>(R.id.some_object_for_round) }
+    private val objectWithListOfImage by lazy { findViewById<ImageView>(R.id.some_list_of_image) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +32,12 @@ class MainActivity : AppCompatActivity() {
         applyChangeLinearTranslationAnimation()
 
         applyObjectAnimByCircle()
+
+        objectWithListOfImage.setBackgroundResource(R.drawable.list_of_some_drawables)
+        val listOfAnim = objectWithListOfImage.background as AnimationDrawable
+        objectWithListOfImage.setOnClickListener {
+            listOfAnim.start()
+        }
     }
 
     private fun applyChangeBackgroundColorAnimation() {
@@ -59,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun applyObjectAnimByCircle(){
+    private fun applyObjectAnimByCircle() {
         val path = Path()
         path.addCircle(100f, 400f, 200f, Path.Direction.CW)
 

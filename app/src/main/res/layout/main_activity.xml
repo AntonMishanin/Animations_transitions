@@ -22,7 +22,7 @@
         android:src="@color/black"
         tools:ignore="ContentDescription" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/anim_by_click"
         android:layout_width="56dp"
         android:layout_height="56dp"
@@ -30,5 +30,12 @@
         android:background="@color/teal_200"
         android:src="@color/black"
         android:stateListAnimator="@xml/anim_scale"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/some_list_of_image"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom|end"
         tools:ignore="ContentDescription" />
 </FrameLayout>
