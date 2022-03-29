@@ -40,4 +40,20 @@
         android:layout_height="56dp"
         android:layout_gravity="bottom|end"
         tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/card_back"
+        android:layout_width="156dp"
+        android:layout_height="156dp"
+        android:layout_gravity="center"
+        android:background="#987"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/card_front"
+        android:layout_width="156dp"
+        android:layout_height="156dp"
+        android:layout_gravity="center"
+        android:background="#334"
+        tools:ignore="ContentDescription" />
 </FrameLayout>
