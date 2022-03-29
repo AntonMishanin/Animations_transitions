@@ -38,4 +38,12 @@
         android:layout_height="56dp"
         android:layout_gravity="bottom|end"
         tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/move_by_path"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@color/black"
+        android:layout_gravity="center"
+        tools:ignore="ContentDescription" />
 </FrameLayout>

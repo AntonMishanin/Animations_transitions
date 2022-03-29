@@ -7,7 +7,7 @@ import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.animation.AccelerateInterpolator
+import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 
@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private val someObjectForLinear by lazy { findViewById<ImageView>(R.id.some_object_for_linear) }
     private val objectForRound by lazy { findViewById<ImageView>(R.id.some_object_for_round) }
     private val objectWithListOfImage by lazy { findViewById<ImageView>(R.id.some_list_of_image) }
+    private val moveByPath by lazy { findViewById<ImageView>(R.id.move_by_path) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +38,10 @@ class MainActivity : AppCompatActivity() {
         val listOfAnim = objectWithListOfImage.background as AnimationDrawable
         objectWithListOfImage.setOnClickListener {
             listOfAnim.start()
+        }
+
+        moveByPath.setOnClickListener {
+            moveViewByCustomPath()
         }
     }
 
@@ -77,6 +82,16 @@ class MainActivity : AppCompatActivity() {
 
         ObjectAnimator.ofFloat(objectForRound, "translationX", "translationY", path).apply {
             duration = 15000
+            start()
+        }
+    }
+
+    private fun moveViewByCustomPath() {
+        val path = Path().apply {
+            arcTo(0f, 0f, 1000f, 1000f, 270f, -180f, true)
+        }
+        ObjectAnimator.ofFloat(moveByPath, View.X, View.Y, path).apply {
+            duration = 2000
             start()
         }
     }
