@@ -1,13 +1,9 @@
 package com.my.my_animation_example
 
 import android.animation.*
-import android.graphics.Color
-import android.graphics.Path
-import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.animation.AccelerateInterpolator
+import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 
@@ -27,57 +23,33 @@ class MainActivity : AppCompatActivity() {
         //        .commitNow()
         //}
 
-        applyChangeBackgroundColorAnimation()
-
-        applyChangeLinearTranslationAnimation()
-
-        applyObjectAnimByCircle()
-
-        objectWithListOfImage.setBackgroundResource(R.drawable.list_of_some_drawables)
-        val listOfAnim = objectWithListOfImage.background as AnimationDrawable
-        objectWithListOfImage.setOnClickListener {
-            listOfAnim.start()
-        }
-    }
-
-    private fun applyChangeBackgroundColorAnimation() {
-        ValueAnimator.ofObject(ArgbEvaluator(), Color.RED, Color.GREEN).apply {
-            //duration in millis of all animation
-            duration = 30000
-            addUpdateListener { updatedAnimation ->
-                Log.d("DD", "updatedAnimation.animatedValue = ${updatedAnimation.animatedValue}")
-                view.setBackgroundColor(updatedAnimation.animatedValue as Int)
-            }
-            start()
-        }
-    }
-
-    private fun applyChangeLinearTranslationAnimation() {
         someObjectForLinear.setOnClickListener {
-            Log.d("qq", "CLICK")
-        }
-
-        ValueAnimator.ofFloat(0f, 600f).apply {
-            addUpdateListener { updatedAnimation ->
-                someObjectForLinear.translationX = updatedAnimation.animatedValue as Float
-            }
-
-            duration = 10000
-            start()
+            crossFade()
         }
     }
 
-    private fun applyObjectAnimByCircle() {
-        val path = Path()
-        path.addCircle(100f, 400f, 200f, Path.Direction.CW)
+    private fun crossFade() {
+        val shortAnimationDuration =
+            10 * resources.getInteger(android.R.integer.config_shortAnimTime)
 
-        objectForRound.setOnClickListener {
-            Log.d("ww", "CLICK CIRCLE")
+        someObjectForLinear.apply {
+
+            alpha = 0f
+            visibility = View.VISIBLE
+
+            animate()
+                .alpha(1f)
+                .setDuration(shortAnimationDuration.toLong())
+                .setListener(null)
         }
 
-        ObjectAnimator.ofFloat(objectForRound, "translationX", "translationY", path).apply {
-            duration = 15000
-            start()
-        }
+        objectForRound.animate()
+            .alpha(0f)
+            .setDuration(shortAnimationDuration.toLong())
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    objectForRound.visibility = View.GONE
+                }
+            })
     }
 }
